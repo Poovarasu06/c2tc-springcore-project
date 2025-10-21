@@ -8,40 +8,40 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/admins")
+@RequestMapping("/adminservice")
 public class AdminController {
 
     @Autowired
     private AdminService adminService;
 
-    // Create - yuh it creates data on the table
+    // Create a new admin
     @PostMapping
-    public Admin addAdmin(@RequestBody Admin admin) {
+    public Admin createAdmin(@RequestBody Admin admin) {
         return adminService.saveAdmin(admin);
     }
 
-    // Read - Get data by id
-    @GetMapping("/{id}")
-    public Admin getAdminById(@PathVariable Long id) {
-        return adminService.getAdminById(id);
-    }
-
-    // this is also read but for all datas
+    // Get all admins
     @GetMapping
     public List<Admin> getAllAdmins() {
         return adminService.getAllAdmins();
     }
 
-    // forgot to add this but i added this from old repo from my laptop
+    // Update an existing admin
     @PutMapping("/{id}")
     public Admin updateAdmin(@PathVariable Long id, @RequestBody Admin admin) {
-        admin.setId(id); // Ensure correct ID is set
+        admin.setId(id);
         return adminService.saveAdmin(admin);
     }
 
-    // same but deletes with id
+    // Delete an admin by ID
     @DeleteMapping("/{id}")
     public void deleteAdmin(@PathVariable Long id) {
         adminService.deleteAdmin(id);
+    }
+
+    // Optional: Get one admin by ID
+    @GetMapping("/{id}")
+    public Admin getAdminById(@PathVariable Long id) {
+        return adminService.getAdminById(id);
     }
 }

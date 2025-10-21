@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AdminService {
@@ -22,7 +23,8 @@ public class AdminService {
     }
 
     public Admin getAdminById(Long id) {
-        return adminRepository.findById(id).orElse(null);
+        Optional<Admin> admin = adminRepository.findById(id);
+        return admin.orElse(null);
     }
 
     public void deleteAdmin(Long id) {
